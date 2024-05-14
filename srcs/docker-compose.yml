@@ -12,4 +12,4 @@ services:
     build: requirements/wordpress/.
     container_name: wp-php
     volumes:
-      - ./web:var/www/html
+      - ./web:/var/www/html
