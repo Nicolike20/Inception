@@ -5,4 +5,11 @@ services:
     build: requirements/nginx/.
     container_name: nginx
     ports:
-      - "80:80"
+      - "1024:1024" #cambiar a 80:80
+    volumes:
+      - ./web:/var/www/html
+  wordpress:
+    build: requirements/wordpress/.
+    container_name: wp-php
+    volumes:
+      - ./web:var/www/html
