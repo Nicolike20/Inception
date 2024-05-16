@@ -1,11 +1,16 @@
 FROM debian:latest
 
 RUN apt update && apt upgrade -y && apt install -y \
-    php-fpm
+    php-fpm \
+    php-mysqli \
+    curl
 
 COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/.
+COPY ./tools/script.sh .
 
-CMD ["php-fpm8.2", "-F"]
+RUN chmod +x script.sh
+
+CMD ["./script.sh"]
 
 #instalamos php y lo ejecutamos en el foreground
 #copiamos el archivo de configuracion 'nuestro' dentro del container
