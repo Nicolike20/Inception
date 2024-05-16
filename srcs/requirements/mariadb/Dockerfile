@@ -19,3 +19,5 @@ CMD ["./script.sh"]
 #copiamos el script init.sl al container (para inicializar la base de datos y nuestro usuario)
 
 #creamos la carpeta /run/mysqld
+
+#damos permisos de ejecucion al script y lo ejecutamos
