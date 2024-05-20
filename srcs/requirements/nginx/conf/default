@@ -24,6 +24,7 @@ server {
 
 	# SSL configuration
 	#
+	ssl_protocols TLSv1.2 TLSv1.3;
 	# listen 443 ssl default_server;
 	# listen [::]:443 ssl default_server;
 	#
