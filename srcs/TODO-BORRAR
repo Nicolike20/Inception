@@ -1,4 +1,4 @@
 checkear apk add --no-cache
 hacer makefile
 hacen falta las lineas de ssl_certificate en la conf de nginx?
-
+está bien hecho lo de server_name nortolan.42.fr?
