@@ -1,6 +1,8 @@
 checkear apk add --no-cache
-hacer makefile
 hacen falta las lineas de ssl_certificate en la conf de nginx?
 está bien hecho lo de server_name nortolan.42.fr?
 guia en fracnes extensa: https://tuto.grademe.fr/inception/
+
 comprobar el resto de variables por si tengo que añadir mas al .env, y entender como funciona si no lo puedo tener en el git
+
+LOS VOLUMENES ESTAN BIEN MONTADOS? <- NO

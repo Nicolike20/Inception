@@ -47,5 +47,19 @@ services:
     restart: always
     #expose:
     #  - "3306" ESTO ES NECESARIO?
+
+volumes:
+  database:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/database
+  web:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/web
 networks:
   inception:
