@@ -19,15 +19,15 @@ up:
 
 down:
 	docker-compose -f srcs/docker-compose.yml down
-#
-#clean: down
-#	docker volume rm $(addprefix srcs/, $(VOLUMES_DIR)) -f
-#	docker volume prune -f
-#	rm -rf $(VOLUMES)
-#
-#prune: clean
-#	docker system prune -af
-#
-#re: prune up
 
-.PHONY: all up down #clean prune re
+clean: down
+	docker volume rm $(addprefix srcs_, $(VOLUMES_DIR)) -f
+	docker volume prune -f
+	rm -rf $(VOLUMES)
+
+prune: clean
+	docker system prune -af
+
+re: prune up
+
+.PHONY: all up down clean prune re
