@@ -14,11 +14,11 @@ VOLUMES = $(addprefix $(VOLUMES_PATH)/, $(VOLUMES_DIR))
 all: down up
 
 up:
-	docker-compose -f ./srcs/docker-compose.yml up --build
 	mkdir -p $(VOLUMES)
+	docker compose -f ./srcs/docker-compose.yml up --build
 
 down:
-	docker-compose -f srcs/docker-compose.yml down
+	docker compose -f srcs/docker-compose.yml down
 
 clean: down
 	docker volume rm $(addprefix srcs_, $(VOLUMES_DIR)) -f
