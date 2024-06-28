@@ -1,11 +1,12 @@
-FROM debian:latest
+FROM debian:bullseye
 
 RUN apt update && apt upgrade -y && apt install -y \
     php-fpm \
     php-mysqli \
     curl
 
-COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/.
+RUN mkdir /var/run/php
+COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/.
 COPY ./tools/script.sh .
 
 RUN chmod +x script.sh
