@@ -7,7 +7,7 @@ services:
     depends_on:
       - wordpress
     ports:
-      - "1024:1024" #cambiar a 80:80, INVESTIGAR 443:443
+      - "443:443" #cambiar a 80:80, INVESTIGAR 443:443
     volumes:
       - web:/var/www/html
     networks:
