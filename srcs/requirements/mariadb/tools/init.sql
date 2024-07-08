@@ -1,6 +1,41 @@
-CREATE DATABASE wordpress;
-CREATE USER 'nortolan'@'%' IDENTIFIED BY '115!hola';
-GRANT ALL PRIVILEGES ON *.* TO 'nortolan'@'%' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
+--CREATE DATABASE wordpress;
+--CREATE USER 'nortolan'@'%' IDENTIFIED BY '115!hola';
+--GRANT ALL PRIVILEGES ON *.* TO 'nortolan'@'%' WITH GRANT OPTION;
+--FLUSH PRIVILEGES;
 
 --REVISAR/QUITAR DATOS DE AQUI (METERLOS EN EL ENV)
+
+tfile=`mktemp`
+if [ ! -f "$tfile" ]; then
+    return 1
+fi
+
+cat << EOF > $tfile
+USE mysql ;
+FLUSH PRIVILEGES ;
+
+DROP DATABASE IF EXISTS test ;
+
+GRANT ALL ON *.* TO 'root'@'%' identified by '$WP_PASSWORD' WITH GRANT OPTION ;
+GRANT ALL ON *.* TO 'root'@'localhost' identified by '$WP_PASSWORD' WITH GRANT OPTION ;
+SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${WP_PASSWORD}') ;
+SET PASSWORD FOR 'root'@'%'=PASSWORD('${WP_PASSWORD}') ;
+FLUSH PRIVILEGES ;
+
+CREATE DATABASE IF NOT EXISTS $WP_DB_NAME CHARACTER SET utf8 COLLATE utf8_general_ci ;
+CREATE USER '$WP_USER'@'localhost' IDENTIFIED BY '$WP_PASSWORD';
+CREATE USER '$WP_USER'@'%' IDENTIFIED BY '$WP_PASSWORD';
+GRANT ALL PRIVILEGES ON *.* TO '$WP_USER'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO '$WP_USER'@'%';
+FLUSH PRIVILEGES ;
+
+EOF
+
+-- ESTAS LINEA ES PARA EJECUTAR LA QUERY PASANDO EL CONTENIDO DEL ARCHIVO DONDE SE HA GUARDADO
+-- POR EL STANDARD INPUT, PON EL USUARIO Y PASSWORD (si tienes) QUE SE CONECTEN A LA DB EN TU CASO, YO 
+-- YO TENGO ESTAS DOS LINEA Y UNA COMENTADA NS PORQUE, Y NS QUE SIGNIFICA EL "--bootstrap"
+/usr/bin/mysqld --user=mysql --bootstrap < $tfile
+--/usr/bin/mysql root -p$MYSQL_ROOT_PASSWORD < $tfile
+
+rm -f $tfile
+echo "[INFO] mysql init process done. Ready for start up."
