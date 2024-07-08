@@ -1,7 +1,23 @@
-checkear apk add --no-cache
-hacen falta las lineas de ssl_certificate en la conf de nginx?
-guia en fracnes extensa: https://tuto.grademe.fr/inception/
+preguntas: 	que plan clonar el repo en la maquina virtual durante la evaluación?
+		que plan con el .env (imagino que simplemente me lo dejo en el escritorio o algo)
+		que plan con el script de mariadb
 
-comprobar el resto de variables por si tengo que añadir mas al .env, y entender como funciona si no lo puedo tener en el git
 
-LOS VOLUMENES ESTAN BIEN MONTADOS? <- NO
+NO OLVIDAR AL ENTREGAR:
+	- comprobar con Docker inspect que los volúmenes están donde deben estar en la vm de 42
+	- comprobar que la parte del WordPress de la corrección funciona
+	- teoría Docker-network
+	- teoría TLS / http vs https
+	- QUITAR CREDENCIALES DEL SCRIPT SQL
+	- CHECK PERSISTENCE!!! (CON LOS CAMBIOS EN WORDPRESS DE LA CORRECCION QUE TB DEBO COMPROBAR)
+	- SACAR .ENV ->>>> COMPROBAR QUE NO HAYA MAS CREDENCIALES
+	- BORRAR README
+
+conectarse a mariadb:
+	- Docker exec -it mariadb bash (conectarse al container)
+	- MySQL -u nortolan(o root) -p (conectarse a la db como root)
+	- contraseña
+	- "show databases;"
+	- "use wordpress;"
+	- "show tables;"
+	- "select * from wp_comments;"
