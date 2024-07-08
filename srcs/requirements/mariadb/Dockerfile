@@ -4,12 +4,13 @@ RUN apt update && apt upgrade -y && apt install -y \
     mariadb-server
 
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/.
-COPY ./tools/init.sql /etc/mysql/init.sql
-COPY ./tools/script.sh .
+#COPY ./tools/init.sql /etc/mysql/init.sql
+COPY ./tools/run.sh .
 
 RUN mkdir /run/mysqld && chmod +x script.sh
+#esto es necesario?
 
-CMD ["./script.sh"]
+CMD ["./run.sh"]
 
 #instalamos mariadb-server y ejecutamos mysqld
 #mysqld utility runs the server process for mariadb (or smth like that)
