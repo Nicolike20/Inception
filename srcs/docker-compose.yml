@@ -44,6 +44,11 @@ services:
       - database:/var/lib/mysql
     networks:
       - inception
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      WP_DB_NAME: ${WP_DB_NAME}
+      WP_USER: ${WP_USER}
+      WP_PASSWORD: ${WP_PASSWORD}
     restart: always
     #expose:
     #  - "3306" ESTO ES NECESARIO?

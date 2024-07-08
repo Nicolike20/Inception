@@ -17,12 +17,12 @@ else
 	chown -R mysql /var/lib/mysql
 	mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql --rpm > /dev/null
 
-tfile=`mktemp`
-if [ ! -f "$tfile" ]; then
-    return 1
-fi
+	tfile=`mktemp`
+	if [ ! -f "$tfile" ]; then
+   	 return 1
+	fi
 
-cat << EOF > $tfile
+	cat << EOF > $tfile
 USE mysql ;
 FLUSH PRIVILEGES ;
 
@@ -48,10 +48,12 @@ EOF
 
 rm -f $tfile
 
-# allow remote connections
-sed -i "s|.*skip-networking.*|# skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf
-sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/my.cnf.d/mariadb-server.cnf
+fi
 
-exec /usr/bin/mysqld --user=mysql --console
+# allow remote connections
+#sed -i "s|.*skip-networking.*|# skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf
+#sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/my.cnf.d/mariadb-server.cnf
+
+#exec /usr/bin/mysqld --user=mysql --console
 
 #ESTAS TRES ULTIMAS LINEAS SON NECESARIAS?
