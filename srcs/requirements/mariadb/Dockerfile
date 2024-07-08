@@ -8,7 +8,6 @@ COPY ./tools/init.sql /etc/mysql/init.sql
 COPY ./tools/script.sh .
 
 RUN mkdir /run/mysqld && chmod +x script.sh
-#puede que necesite un script para que esta carpeta se cree y se borre cuando haga falta
 
 CMD ["./script.sh"]
 

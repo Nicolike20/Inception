@@ -11,7 +11,7 @@ services:
     volumes:
       - web:/var/www/html
     networks:
-      inception:
+      - inception
     restart: always
   wordpress:
     build: requirements/wordpress/.
@@ -21,7 +21,7 @@ services:
     volumes:
       - web:/var/www/html
     networks:
-      inception:
+      - inception
     environment:
       DOMAIN_NAME: ${DOMAIN_NAME}
       WP_DB_NAME: ${WP_DB_NAME}
@@ -43,7 +43,7 @@ services:
     volumes:
       - database:/var/lib/mysql
     networks:
-      inception:
+      - inception
     restart: always
     #expose:
     #  - "3306" ESTO ES NECESARIO?
@@ -63,3 +63,4 @@ volumes:
       device: ${HOME}/data/web
 networks:
   inception:
+    driver: bridge
