@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Debugging: print environment variables
+echo "WP_NAME=${WP_NAME}"
+echo "WP_USER=${WP_USER}"
+echo "WP_PASSWORD=${WP_PASSWORD}"
+
 # Ensure the mysqld directory exists with proper permissions
 mkdir -p /run/mysqld
 chown mysql:mysql /run/mysqld
@@ -13,20 +18,16 @@ while ! mysqladmin ping --silent; do
     sleep 1
 done
 
-# Run initialization commands
-mysql -e "CREATE DATABASE IF NOT EXISTS \`${WP_NAME}\`;"
-mysql -e "CREATE USER IF NOT EXISTS \`${WP_USER}\`@'localhost' IDENTIFIED BY '${WP_PASSWORD}';"
-mysql -e "GRANT ALL PRIVILEGES ON \`${WP_NAME}\`.* TO \`${WP_USER}\`@'%' IDENTIFIED BY '${WP_PASSWORD}';"
+# Set the root password and create the database and user
 mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${WP_PASSWORD}';"
-mysql -e "FLUSH PRIVILEGES;"
+mysql -u root -p${WP_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS \`${WP_DB_NAME}\`;"
+mysql -u root -p${WP_PASSWORD} -e "CREATE USER IF NOT EXISTS \`${WP_USER}\`@'localhost' IDENTIFIED BY '${WP_PASSWORD}';"
+mysql -u root -p${WP_PASSWORD} -e "GRANT ALL PRIVILEGES ON \`${WP_DB_NAME}\`.* TO \`${WP_USER}\`@'%' IDENTIFIED BY '${WP_PASSWORD}';"
+mysql -u root -p${WP_PASSWORD} -e "FLUSH PRIVILEGES;"
 mysqladmin -u root -p${WP_PASSWORD} shutdown
 
 # Start MariaDB in the foreground
 exec mysqld_safe
-
-
-
-
 
 
 
