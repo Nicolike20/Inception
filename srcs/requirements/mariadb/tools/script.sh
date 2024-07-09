@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Debugging: print environment variables
-echo "WP_NAME=${WP_NAME}"
+echo "WP_DB_NAME=${WP_DB_NAME}"
 echo "WP_USER=${WP_USER}"
 echo "WP_PASSWORD=${WP_PASSWORD}"
 
