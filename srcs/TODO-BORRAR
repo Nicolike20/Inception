@@ -1,8 +1,3 @@
-preguntas: 	que plan clonar el repo en la maquina virtual durante la evaluación?
-		que plan con el .env (imagino que simplemente me lo dejo en el escritorio o algo)
-		que plan con el script de mariadb
-
-
 NO OLVIDAR AL ENTREGAR:
 	- comprobar con Docker inspect que los volúmenes están donde deben estar en la vm de 42
 	- comprobar que la parte del WordPress de la corrección funciona
