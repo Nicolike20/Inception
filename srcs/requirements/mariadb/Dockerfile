@@ -3,14 +3,15 @@ FROM debian:bullseye
 RUN apt update && apt upgrade -y && apt install -y \
     mariadb-server
 
-COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/.
-#COPY ./tools/init.sql /etc/mysql/init.sql
-COPY ./tools/script.sh .
-#COPY ./tools/run.sh .
+COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
+COPY ./tools/script.sh /usr/local/bin/script.sh
 
-RUN mkdir /run/mysqld && chmod +x script.sh
-#RUN mkdir /run/mysqld && chmod +x run.sh
-#esto es necesario?
+# Ensure the necessary directories exist with proper permissions
+RUN mkdir -p /run/mysqld /var/log/mysql && \
+    chown -R mysql:mysql /run/mysqld /var/log/mysql /var/lib/mysql && \
+    chmod 755 /run/mysqld
+
+RUN chmod +x /usr/local/bin/script.sh
 
 CMD ["./script.sh"]
 
