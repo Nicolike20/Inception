@@ -36,8 +36,8 @@ services:
       WP_USER_EMAIL: ${WP_USER_EMAIL}
       WP_USER_PASSWORD: ${WP_USER_PASSWORD}
     restart: always #on-failure?? lo mismo pa los otros
-    #expose:
-    #  - "9000" ESTO ES NECESARIO?
+    expose:
+      - "9000" #ESTO ES NECESARIO?
   mariadb:
     build: requirements/mariadb/.
     container_name: mariadb
@@ -51,8 +51,8 @@ services:
       WP_USER: ${WP_USER}
       WP_PASSWORD: ${WP_PASSWORD}
     restart: always
-    #expose:
-    #  - "3306" ESTO ES NECESARIO?
+    expose:
+      - "3306" #ESTO ES NECESARIO?
 
 volumes:
   database:
