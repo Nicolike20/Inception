@@ -1,5 +1,10 @@
 #!/bin/bash
 
+while ! mariadb -h$MYSQL_HOST -u$WP_DB_USER -p$WP_PASSWORD $WP_NAME --silent; do
+	echo "[INFO] waiting for database..."
+	sleep 1;
+done
+
 cd /var/www/html
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
