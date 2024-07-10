@@ -15,7 +15,7 @@ services:
     restart: always
   wordpress:
     build: requirements/wordpress/.
-    container_name: wp-php #deberia cambiarle el nombre?
+    container_name: wordpress #deberia cambiarle el nombre?
     depends_on:
       - mariadb
     volumes:
