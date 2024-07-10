@@ -10,7 +10,7 @@ mkdir -p /run/mysqld
 chown mysql:mysql /run/mysqld
 
 # Start MariaDB in the background and log to file
-mysqld_safe --log-error=/var/log/mysql/error.log &
+mysqld_safe & #--log-error=/var/log/mysql/error.log &
 
 # Wait for the MySQL service to start
 while ! mysqladmin ping --silent; do
