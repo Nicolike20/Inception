@@ -1,12 +1,9 @@
 NO OLVIDAR AL ENTREGAR:
-	- AVERIGUAR POR QUE SI HAGO MAKE 2 VECES DA ERRORES, PERO MAKE PRUNE Y MAKE OTRA VEZ NO, Y SI MERECE LA PENA INTENTAR ARREGLARLO O QUE
-	- comprobar con Docker inspect que los volúmenes están donde deben estar en la vm de 42
-	- comprobar que la parte del WordPress de la corrección funciona
-	- teoría Docker-network
-	- teoría TLS / http vs https
-	- CHECK PERSISTENCE!!! (CON LOS CAMBIOS EN WORDPRESS DE LA CORRECCION QUE TB DEBO COMPROBAR)
-	- SACAR .ENV ->>>> COMPROBAR QUE NO HAYA MAS CREDENCIALES
 	- BORRAR README
+	- BORRAR TODO
+	- SACAR .ENV
+	- BORRAR LOS PRINTF(ECHOS) EN LOS SCRIPT
+	- VER QUE PLAN PARA CLONAR EN LA VM
     - BORRAR COMENTARIOS INNECESARIOS
 
 conectarse a mariadb:
