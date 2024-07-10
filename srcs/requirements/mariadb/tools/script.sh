@@ -18,12 +18,13 @@ while ! mysqladmin ping --silent; do
     sleep 1
 done
 
+echo 'HOLA111111111111'
 # Ensure the root user has the correct password
 mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${WP_PASSWORD}';"
-
+echo 'HOLA222222222222'
 # Check if the database already exists
 DB_EXISTS=$(mysql -u root -p${WP_PASSWORD} -e "SHOW DATABASES LIKE '${WP_DB_NAME}';" | grep "${WP_DB_NAME}" > /dev/null; echo "$?")
-
+echo 'HOLA333333333333'
 if [ $DB_EXISTS -eq 1 ]; then
     echo "Database ${WP_DB_NAME} does not exist. Creating..."
     # Initialize the database and user
