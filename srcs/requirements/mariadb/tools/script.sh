@@ -22,7 +22,7 @@ done
 mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${WP_PASSWORD}';"
 
 # Check if the database already exists
-DB_EXISTS=$(mysql -u root -p${WP_PASSWORD} -e "SHOW DATABASES LIKE '${WP_DB_AME}';" | grep "${WP_DB_NAME}" > /dev/null; echo "$?")
+DB_EXISTS=$(mysql -u root -p${WP_PASSWORD} -e "SHOW DATABASES LIKE '${WP_DB_NAME}';" | grep "${WP_DB_NAME}" > /dev/null; echo "$?")
 
 if [ $DB_EXISTS -eq 1 ]; then
     echo "Database ${WP_DB_NAME} does not exist. Creating..."
