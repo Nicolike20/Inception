@@ -1,8 +1,9 @@
 #!/bin/bash
 
-while ! mariadb -h$MYSQL_HOST -u$WP_DB_USER -p$WP_PASSWORD $WP_NAME --silent; do
-	echo "[INFO] waiting for database..."
-	sleep 1;
+# Wait until database is ready
+while ! mysqladmin ping -h "$MYSQL_HOST" --silent; do
+    echo 'waiting for mysqld to be connectable...'
+    sleep 1
 done
 
 cd /var/www/html
