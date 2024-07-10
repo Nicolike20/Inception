@@ -2,9 +2,7 @@ NO OLVIDAR AL ENTREGAR:
 	- BORRAR README
 	- BORRAR TODO
 	- SACAR .ENV
-	- BORRAR LOS PRINTF(ECHOS) EN LOS SCRIPT
 	- VER QUE PLAN PARA CLONAR EN LA VM
-    - BORRAR COMENTARIOS INNECESARIOS
 
 conectarse a mariadb:
 	- Docker exec -it mariadb bash (conectarse al container)

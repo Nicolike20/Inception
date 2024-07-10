@@ -1,15 +1,16 @@
 #!/bin/bash
 
-# Wait until database is ready
+# wait until database is ready
 while ! mysqladmin ping -h "$MYSQL_HOST" --silent; do
     echo 'waiting for mysqld to be connectable...'
     sleep 1
 done
-
+# set up wp-cli
 cd /var/www/html
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 
+# if database already exists, skip set up
 if [ ! -f wp-config.php ]; then
     echo 'WordPress not found. Installing...'
     ./wp-cli.phar core download --allow-root

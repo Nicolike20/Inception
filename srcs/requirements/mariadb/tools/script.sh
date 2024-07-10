@@ -1,33 +1,24 @@
 #!/bin/bash
 
-# Debugging: print environment variables
-echo "WP_DB_NAME=${WP_DB_NAME}"
-echo "WP_USER=${WP_USER}"
-echo "WP_PASSWORD=${WP_PASSWORD}"
-
-# Ensure the mysqld directory exists with proper permissions
+# create mysql directories
 mkdir -p /run/mysqld
 chown mysql:mysql /run/mysqld
 
-# Start MariaDB in the background and log to file
-mysqld_safe & #--log-error=/var/log/mysql/error.log &
+# start mariadb in the background
+mysqld_safe &
 
-# Wait for the MySQL service to start
+# wait for mysql to start
 while ! mysqladmin ping --silent; do
     echo 'waiting for mysqld to be connectable...'
     sleep 1
 done
 
-#echo 'HOLA111111111111'
-# Ensure the root user has the correct password
-#mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${WP_PASSWORD}';"
-#echo 'HOLA222222222222'
-# Check if the database already exists
+# check if database already exists
 DB_EXISTS=$(mysql -u root -p${WP_PASSWORD} -e "SHOW DATABASES LIKE '${WP_DB_NAME}';" | grep "${WP_DB_NAME}" > /dev/null; echo "$?")
-#echo 'HOLA333333333333'
+
 if [ $DB_EXISTS -eq 1 ]; then
     echo "Database ${WP_DB_NAME} does not exist. Creating..."
-    # Initialize the database and user
+    # initialize database and user
     mysql -u root -p${WP_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS \`${WP_DB_NAME}\`;"
     mysql -u root -p${WP_PASSWORD} -e "CREATE USER IF NOT EXISTS \`${WP_USER}\`@'localhost' IDENTIFIED BY '${WP_PASSWORD}';"
     mysql -u root -p${WP_PASSWORD} -e "GRANT ALL PRIVILEGES ON \`${WP_DB_NAME}\`.* TO \`${WP_USER}\`@'%' IDENTIFIED BY '${WP_PASSWORD}';"
@@ -38,18 +29,5 @@ fi
 
 mysqladmin -u root -p${WP_PASSWORD} shutdown
 
-# Start MariaDB in the foreground
+# start mariadb in the foreground
 exec mysqld_safe
-
-
-
-
-
-
-
-
-#mysql_install_db
-#mysqld
-
-
-# SI LO OTRO FUNCIONA, BORRAR ESTO
