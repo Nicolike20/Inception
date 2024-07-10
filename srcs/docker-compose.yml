@@ -23,7 +23,7 @@ services:
     networks:
       - inception
     environment:
-#      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_HOST: ${MYSQL_HOST}
       DOMAIN_NAME: ${DOMAIN_NAME}
       WP_DB_NAME: ${WP_DB_NAME}
       WP_USER: ${WP_USER}
