@@ -18,19 +18,22 @@ while ! mysqladmin ping --silent; do
     sleep 1
 done
 
-# Check if the database already exists
-if mysql -u root -p${WP_PASSWORD} -e "USE ${WP_DB_NAME}"; then
-    echo "Database ${WP_DB_NAME} already exists. Skipping initialization."
-else
-    # Initialize the database and user
-    mysql -u root -p${WP_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS \`${WP_DB_NAME}\`;"
-    mysql -u root -p${WP_PASSWORD} -e "CREATE USER IF NOT EXISTS \`${WP_USER}\`@'localhost' IDENTIFIED BY '${WP_PASSWORD}';"
-    mysql -u root -p${WP_PASSWORD} -e "GRANT ALL PRIVILEGES ON \`${WP_DB_NAME}\`.* TO \`${WP_USER}\`@'%' IDENTIFIED BY '${WP_PASSWORD}';"
-    mysql -u root -p${WP_PASSWORD} -e "FLUSH PRIVILEGES;"
-fi
-
 # Ensure the root user has the correct password
-mysql -u root -p${WP_PASSWORD} -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${WP_PASSWORD}';"
+mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${WP_PASSWORD}';"
+
+# Check if the database already exists
+DB_EXISTS=$(mysql -u root -p${WP_PASSWORD} -e "SHOW DATABASES LIKE '${WP_NAME}';" | grep "${WP_NAME}" > /dev/null; echo "$?")
+
+if [ $DB_EXISTS -eq 1 ]; then
+    echo "Database ${WP_NAME} does not exist. Creating..."
+    # Initialize the database and user
+    mysql -u root -p${WP_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS \`${WP_NAME}\`;"
+    mysql -u root -p${WP_PASSWORD} -e "CREATE USER IF NOT EXISTS \`${WP_USER}\`@'localhost' IDENTIFIED BY '${WP_PASSWORD}';"
+    mysql -u root -p${WP_PASSWORD} -e "GRANT ALL PRIVILEGES ON \`${WP_NAME}\`.* TO \`${WP_USER}\`@'%' IDENTIFIED BY '${WP_PASSWORD}';"
+    mysql -u root -p${WP_PASSWORD} -e "FLUSH PRIVILEGES;"
+else
+    echo "Database ${WP_NAME} already exists. Skipping initialization."
+fi
 
 mysqladmin -u root -p${WP_PASSWORD} shutdown
 
