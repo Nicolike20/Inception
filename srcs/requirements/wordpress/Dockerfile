@@ -12,7 +12,7 @@ COPY ./tools/script.sh .
 
 RUN chmod +x script.sh
 
-CMD ["./script.sh"]
+CMD ["sh", "./script.sh"]
 
 #instalamos php y lo ejecutamos en el foreground
 #copiamos el archivo de configuracion 'nuestro' dentro del container

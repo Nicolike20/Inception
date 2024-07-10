@@ -13,7 +13,7 @@ RUN mkdir -p /run/mysqld /var/log/mysql && \
 
 RUN chmod +x /usr/local/bin/script.sh
 
-CMD ["/usr/local/bin/script.sh"]
+CMD ["sh", "/usr/local/bin/script.sh"]
 
 #EXPOSE 3306 ESTO ES NECESARIO?
 
