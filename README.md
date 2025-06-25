@@ -63,23 +63,12 @@ Each service must run in its own container, and only Docker and docker-compose a
 - Networking between containers using custom Docker bridges  
 - Secure WordPress and MariaDB configuration
 
----
-
-## 🚀 Bonus Features (if implemented)
-
-✅ Redis or Memcached integration for caching  
-✅ Static site monitoring or admin tools (e.g. Portainer)  
-✅ SSL via Certbot with automated renewal  
-✅ Extended service stack (e.g., FTP, static site, adminer)  
-✅ Automatic backups and volume management  
-✅ Non-root user Dockerfile hardening
 
 ---
 
 ## 📁 Project Status
 
 ✅ Completed – all mandatory services implemented, secured, and orchestrated via Docker Compose.  
-🎯 Bonus – additional services and features added *(if applicable)*.
 
 ---
 
